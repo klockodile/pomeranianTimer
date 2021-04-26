@@ -17,7 +17,7 @@ function Pomodoro() {
     () => {
       // ToDo: Implement what should happen when the timer is running
       if (timeRemaining === 0) {
-        // new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`).play();
+        new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`).play();
         const timer = mode === "focus" ? breakDuration : focusDuration;
         setTimeRemaining(timer * 60);
         setMode((prevMode) => (prevMode === "focus" ? "break" : "focus"));
