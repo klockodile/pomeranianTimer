@@ -3,6 +3,8 @@ import classNames from "../utils/class-names";
 import useInterval from "../utils/useInterval";
 import { minutesToDuration } from "../utils/duration";
 import Progress from "./Progress";
+import Break from "./Break";
+
 
 function Pomodoro() {
   // Timer starts out paused
@@ -17,7 +19,7 @@ function Pomodoro() {
     () => {
       // ToDo: Implement what should happen when the timer is running
       if (timeRemaining === 0) {
-        new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`).play();
+        // new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`).play();
         const timer = mode === "focus" ? breakDuration : focusDuration;
         setTimeRemaining(timer * 60);
         setMode((prevMode) => (prevMode === "focus" ? "break" : "focus"));
@@ -98,36 +100,12 @@ function Pomodoro() {
         </div>
         <div className="col">
           <div className="float-right">
-            <div className="input-group input-group-lg mb-2">
-              <span className="input-group-text" data-testid="duration-break">
-                {/* TODO: Update this text to display the current break session duration */}
-                Break Duration: {minutesToDuration(breakDuration)}
-              </span>
-              <div className="input-group-append">
-                {/* TODO: Implement decreasing break duration and disable during a focus or break session*/}
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-testid="decrease-break"
-                  onClick={decreaseBreak}
-                  disabled={breakDuration <= 1 || isTimerRunning ? true : false}
-                >
-                  <span className="oi oi-minus" />
-                </button>
-                {/* TODO: Implement increasing break duration and disable during a focus or break session*/}
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-testid="increase-break"
-                  onClick={increaseBreak}
-                  disabled={
-                    breakDuration >= 15 || isTimerRunning ? true : false
-                  }
-                >
-                  <span className="oi oi-plus" />
-                </button>
-              </div>
-            </div>
+            <Break 
+             breakDuration = {breakDuration}
+             decreaseBreak = {decreaseBreak}
+             isTimerRunning ={isTimerRunning}
+             increaseBreak = {increaseBreak}
+            />
           </div>
         </div>
       </div>
